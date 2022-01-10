@@ -1471,6 +1471,132 @@ or the MPRV feature in the {\tt mstatus}
 register is used to execute a load or store
 {\em as though} V=1.
 
+
+
+\begin{figure*}[h!]
+{\footnotesize
+\begin{center}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{cEcccc}
+\\
+\instbit{31} &
+\instbitrange{30}{20} &
+\instbit{19} &
+\instbit{18} &
+\instbit{17} &
+ \\
+\hline
+\multicolumn{1}{|c|}{SD} &
+\multicolumn{1}{c|}{\wpri} &
+\multicolumn{1}{c|}{MXR} &
+\multicolumn{1}{c|}{SUM} &
+\multicolumn{1}{c|}{\wpri} &
+ \\
+\hline
+1 & 11 & 1 & 1 & 1 & \\
+\end{tabular}
+\begin{tabular}{cWWWWccccWcc}
+\\
+&
+\instbitrange{16}{15} &
+\instbitrange{14}{13} &
+\instbitrange{12}{11} &
+\instbitrange{10}{9} &
+\instbit{8} &
+\instbit{7} &
+\instbit{6} &
+\instbit{5} &
+\instbitrange{4}{2} &
+\instbit{1} &
+\instbit{0} \\
+\hline
+ &
+\multicolumn{1}{|c|}{XS[1:0]} &
+\multicolumn{1}{c|}{FS[1:0]} &
+\multicolumn{1}{c|}{\wpri} &
+\multicolumn{1}{c|}{VS[1:0]} &
+\multicolumn{1}{c|}{SPP} &
+\multicolumn{1}{c|}{\wpri} &
+\multicolumn{1}{c|}{UBE} &
+\multicolumn{1}{c|}{SPIE} &
+\multicolumn{1}{c|}{\wpri} &
+\multicolumn{1}{c|}{SIE} &
+\multicolumn{1}{c|}{\wpri} \\
+\hline
+ & 2 & 2 & 2 & 2 & 1 & 1 & 1 & 1 & 3 & 1 & 1 \\
+\end{tabular}
+\end{center}
+}
+\vspace{-0.1in}
+\caption{Confidential hypervisor-extended supervisor status register ({\tt chsstatus}) when CHSXLEN=32.}
+\label{chstatusreg-rv32}
+\end{figure*}
+
+\begin{figure*}[h!]
+{\footnotesize
+\begin{center}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{cMFScccc}
+\\
+\instbit{CHSXLEN-1} &
+\instbitrange{CHSXLEN-2}{34} &
+\instbitrange{33}{32} &
+\instbitrange{31}{20} &
+\instbit{19} &
+\instbit{18} &
+\instbit{17} &
+ \\
+\hline
+\multicolumn{1}{|c|}{SD} &
+\multicolumn{1}{c|}{\wpri} &
+\multicolumn{1}{c|}{UXL[1:0]} &
+\multicolumn{1}{c|}{\wpri} &
+\multicolumn{1}{c|}{MXR} &
+\multicolumn{1}{c|}{SUM} &
+\multicolumn{1}{c|}{\wpri} &
+ \\
+\hline
+1 & VSXLEN-35 & 2 & 12 & 1 & 1 & 1 & \\
+\end{tabular}
+\begin{tabular}{cWWWWccccWcc}
+\\
+&
+\instbitrange{16}{15} &
+\instbitrange{14}{13} &
+\instbitrange{12}{11} &
+\instbitrange{10}{9} &
+\instbit{8} &
+\instbit{7} &
+\instbit{6} &
+\instbit{5} &
+\instbitrange{4}{2} &
+\instbit{1} &
+\instbit{0} \\
+\hline
+ &
+\multicolumn{1}{|c|}{XS[1:0]} &
+\multicolumn{1}{c|}{FS[1:0]} &
+\multicolumn{1}{c|}{\wpri} &
+\multicolumn{1}{c|}{VS[1:0]} &
+\multicolumn{1}{c|}{SPP} &
+\multicolumn{1}{c|}{\wpri} &
+\multicolumn{1}{c|}{UBE} &
+\multicolumn{1}{c|}{SPIE} &
+\multicolumn{1}{c|}{\wpri} &
+\multicolumn{1}{c|}{SIE} &
+\multicolumn{1}{c|}{\wpri} \\
+\hline
+ & 2 & 2 & 2 & 2 & 1 & 1 & 1 & 1 & 3 & 1 & 1 \\
+\end{tabular}
+\end{center}
+}
+\vspace{-0.1in}
+\caption{Confidential hypervisor-extended supervisor status register ({\tt chsstatus}) when CHSXLEN=64.}
+\label{chsstatusreg}
+\end{figure*}
+
+
+
 \subsection{Virtual Supervisor Interrupt Registers ({\tt vsip} and {\tt vsie})}
 
 The {\tt vsip} and {\tt vsie} registers are VSXLEN-bit read/write
@@ -1597,6 +1723,43 @@ are read-only zeros.
 Else, {\tt vsip}.SSIP and {\tt vsie}.SSIE are aliases of {\tt hip}.VSSIP
 and {\tt hie}.VSSIE.
 
+
+
+\begin{figure}[h!]
+{\footnotesize
+\begin{center}
+\begin{tabular}{@{}J}
+\instbitrange{CHSXLEN-1}{0} \\
+\hline
+\multicolumn{1}{|c|}{Interrupts (\warl)} \\
+\hline
+CHSXLEN \\
+\end{tabular}
+\end{center}
+}
+\vspace{-0.1in}
+\caption{Confidential hypervisor-extended supervisor interrupt-pending register ({\tt chsip}).}
+\label{vsipreg}
+\end{figure}
+
+\begin{figure}[h!]
+{\footnotesize
+\begin{center}
+\begin{tabular}{@{}J}
+\instbitrange{CHSXLEN-1}{0} \\
+\hline
+\multicolumn{1}{|c|}{Interrupts (\warl)} \\
+\hline
+CHSXLEN \\
+\end{tabular}
+\end{center}
+}
+\vspace{-0.1in}
+\caption{Confidential hypervisor-extended supervisor interrupt-enable register ({\tt chsie}).}
+\label{vsiereg}
+\end{figure}
+
+
 \subsection{Virtual Supervisor Trap Vector Base Address Register ({\tt vstvec})}
 
 The {\tt vstvec} register is a VSXLEN-bit read/write register that is
@@ -1627,6 +1790,27 @@ VSXLEN-2 & 2 \\
 \label{vstvecreg}
 \end{figure*}
 
+
+\begin{figure*}[h!]
+{\footnotesize
+\begin{center}
+\begin{tabular}{J@{}R}
+\instbitrange{CHSXLEN-1}{2} &
+\instbitrange{1}{0} \\
+\hline
+\multicolumn{1}{|c|}{BASE[CHSXLEN-1:2] (\warl)} &
+\multicolumn{1}{c|}{MODE (\warl)} \\
+\hline
+CHSXLEN-2 & 2 \\
+\end{tabular}
+\end{center}
+}
+\vspace{-0.1in}
+\caption{Confidential hypervisor-extended supervisor trap vector base address register ({\tt chstvec}).}
+\label{chstvecreg}
+\end{figure*}
+
+
 \subsection{Virtual Supervisor Scratch Register ({\tt vsscratch})}
 
 The {\tt vsscratch} register is a VSXLEN-bit read/write register that is
@@ -1653,6 +1837,24 @@ VSXLEN \\
 \vspace{-0.1in}
 \caption{Virtual supervisor scratch register ({\tt vsscratch}).}
 \label{vsscratchreg}
+\end{figure*}
+
+
+\begin{figure*}[h!]
+{\footnotesize
+\begin{center}
+\begin{tabular}{@{}J}
+\instbitrange{CHSXLEN-1}{0} \\
+\hline
+\multicolumn{1}{|c|}{\tt chsscratch} \\
+\hline
+CHSXLEN \\
+\end{tabular}
+\end{center}
+}
+\vspace{-0.1in}
+\caption{Confidential hypervisor-extended supervisor scratch register ({\tt chsscratch}).}
+\label{chsscratchreg}
 \end{figure*}
 
 \subsection{Virtual Supervisor Exception Program Counter ({\tt vsepc})}
@@ -1684,6 +1886,24 @@ VSXLEN \\
 \vspace{-0.1in}
 \caption{Virtual supervisor exception program counter ({\tt vsepc}).}
 \label{vsepcreg}
+\end{figure*}
+
+
+\begin{figure*}[h!]
+{\footnotesize
+\begin{center}
+\begin{tabular}{@{}J}
+\instbitrange{CHSXLEN-1}{0} \\
+\hline
+\multicolumn{1}{|c|}{\tt chsepc} \\
+\hline
+CHSXLEN \\
+\end{tabular}
+\end{center}
+}
+\vspace{-0.1in}
+\caption{Confidential hypervisor-extended supervisor exception program counter ({\tt chsepc}).}
+\label{chsepcreg}
 \end{figure*}
 
 \subsection{Virtual Supervisor Cause Register ({\tt vscause})}
@@ -1719,6 +1939,26 @@ values that {\tt scause} can hold.
 \label{vscausereg}
 \end{figure*}
 
+
+\begin{figure*}[h!]
+{\footnotesize
+\begin{center}
+\begin{tabular}{c@{}U}
+\instbit{CHSXLEN-1} &
+\instbitrange{CHSXLEN-2}{0} \\
+\hline
+\multicolumn{1}{|c|}{Interrupt} &
+\multicolumn{1}{c|}{Exception Code (\wlrl)} \\
+\hline
+1 & CHSXLEN-1 \\
+\end{tabular}
+\end{center}
+}
+\vspace{-0.1in}
+\caption{Confidential hypervisor-extended supervisor cause register ({\tt chscause}).}
+\label{chscausereg}
+\end{figure*}
+
 \subsection{Virtual Supervisor Trap Value Register ({\tt vstval})}
 
 The {\tt vstval} register is a VSXLEN-bit read/write register that is
@@ -1748,6 +1988,24 @@ VSXLEN \\
 \vspace{-0.1in}
 \caption{Virtual supervisor trap value register ({\tt vstval}).}
 \label{vstvalreg}
+\end{figure*}
+
+
+\begin{figure*}[h!]
+{\footnotesize
+\begin{center}
+\begin{tabular}{@{}J}
+\instbitrange{CHSXLEN-1}{0} \\
+\hline
+\multicolumn{1}{|c|}{\tt chstval} \\
+\hline
+CHSXLEN \\
+\end{tabular}
+\end{center}
+}
+\vspace{-0.1in}
+\caption{Confidential hypervisor-extended supervisor trap value register ({\tt chstval}).}
+\label{chstvalreg}
 \end{figure*}
 
 \subsection{Virtual Supervisor Address Translation and Protection Register ({\tt vsatp})}
